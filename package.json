@@ -4,17 +4,21 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "DEBUG=app nodemon app.js",
+    "start": "DEBUG=app,app:* nodemon app.js",
     "lint": "eslint app.js"
   },
   "dependencies": {
     "@popperjs/core": "2.4.0",
     "bootstrap": "4.4.1",
+    "bulma": "0.8.2",
     "chalk": "4.0.0",
     "debug": "4.1.1",
+    "ejs": "3.1.2",
     "express": "^4.17.1",
     "jquery": "3.5.0",
+    "mongodb": "3.5.7",
     "morgan": "1.10.0",
+    "mssql": "6.2.0",
     "nodemon": "2.0.3",
     "pug": "2.0.4"
   },
