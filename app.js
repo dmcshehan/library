@@ -4,8 +4,14 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 const sql = require('mssql');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+
+//
+const bodyParser = require('body-parser');
 const bookRoutes = require('./src/routes/book');
 const adminRoutes = require('./src/routes/admin');
+const authRouters = require('./src/routes/auth');
 
 const app = express();
 
@@ -25,6 +31,13 @@ sql.connect(config).catch((error) => {
 });
 
 app.use(morgan('tiny'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({ secret: 'library', resave: true, saveUninitialized: true }));
+
+require('./src/config/passport')(app);
+
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bulma/css')));
 
@@ -34,6 +47,7 @@ app.set('view engine', 'ejs');
 
 app.use('/books', bookRoutes);
 app.use('/admin', adminRoutes);
+app.use('/auth', authRouters);
 
 app.get('/', (req, res) => {
   res.render('index', {
