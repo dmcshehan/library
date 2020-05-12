@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+<!-- END NAV -->
+<div class="section">
+  <div class="container">
+    <div class="row columns is-multiline">
+      <!-- Developers -->
+      <% for(let i = 0; i < books.length; i++){%>
+
+      <div class="column is-one-third">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <h2 class="title is-5"><%=books[i].title%></h2>
+              <span class="tag is-light"><%=books[i].author%></span>
+              <hr>
+              <a class="button is-primary is-small" href="/books/<%=books[i]._id%>">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%}%>
+        
+        <!-- End Developers -->
+      </div>
+    </div>
+  </div>
+
+  <%- include('../partials/footer') %>
